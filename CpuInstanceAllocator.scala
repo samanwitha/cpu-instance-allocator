@@ -20,9 +20,11 @@ object CpuInstanceAllocator extends App {
 
   //get_costs method is used to get the result according to the requirements
   def get_costs(hours: Int, cpus: Option[Int], price: Option[Double]): List[Result] = {
-
+    
+    if (hours <= 0) List()
+    
     //When the input is combination of cpu count and the maximum cost we call the allocateMaxCpusWithMinCost method
-    if ((cpus.isDefined && cpus.get > 0) && (price.isDefined && price.get > 0)) allocateMaxCpusWithMinCost(hours, cpus.get, price.get)
+    else if ((cpus.isDefined && cpus.get > 0) && (price.isDefined && price.get > 0)) allocateMaxCpusWithMinCost(hours, cpus.get, price.get)
 
     //When only the number of cpus is specified in the input we call allocateMaxCpusWithNoCostGiven method
     else if ((cpus.isDefined && cpus.get > 0)) allocateMaxCpusWithNoCostGiven(hours, cpus.get)
