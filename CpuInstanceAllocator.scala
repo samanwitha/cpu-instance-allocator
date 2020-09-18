@@ -1,7 +1,6 @@
+//Written in Scala
 //Object CpuInstanceAllocator can be used to call the get_costs method.
 object CpuInstanceAllocator extends App {
-
-  println(get_costs(7, Some(2104), Some(950)))
 
   //Initializing the server to CPU count Map so that it can be used whenever called for.
   lazy val serverToCpuMap: Map[String, Int] = Map("large" -> 1, "xlarge" -> 2, "2xlarge" -> 4, "4xlarge" -> 8, "8xlarge" -> 16, "10xlarge" -> 32)
