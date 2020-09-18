@@ -1,4 +1,8 @@
 //Written in Scala
+
+//Result will be returned as List of RegionWiseResult objects
+case class RegionWiseResult(region: String, total_cost: String, servers: List[(String, Int)])
+
 //Object CpuInstanceAllocator can be used to call the get_costs method.
 object CpuInstanceAllocator extends App {
 
@@ -232,3 +236,35 @@ object CpuInstanceAllocator extends App {
     }.toList.sortBy(_.total_cost)
   }
 }
+/*
+ Test cases:
+ 1. hours = 0;
+  Result =>  List()
+
+ 2. hours < 0;
+  Result =>  List()
+
+ 3. hours > 0; cpus < 0; price = None
+  Result =>  List()
+
+ 4. hours > 0; cpus = None; price < 0
+  Result =>  List()
+
+ 5. hours > 0; cpus < 0; price <0
+  Result =>  List()
+
+ 6. hours > 0; cpus = None; price = None
+  Result =>  List()
+
+ 7. hours = 5 ; cpus = None ; price = Some(100)
+  Result =>  List(RegionWiseResult(us-west,$99.72999999999999,List((2xlarge,2), (10xlarge,6), (8xlarge,1))), RegionWiseResult(asia,$99.74999999999999,List((xlarge,2), (8xlarge,16), (4xlarge,1))), RegionWiseResult(us-east,$99.85,List((xlarge,1), (10xlarge,7))))
+
+ 8. hours = 5 ; cpus = Some(100) ; price = None
+	Result => List(RegionWiseResult(asia,$37.4,List((xlarge,2), (8xlarge,6))), RegionWiseResult(us-east,$44.599999999999994,List((xlarge,2), (10xlarge,3))), RegionWiseResult(us-west,$47.349999999999994,List((large,4), (10xlarge,3))))
+
+ 9. hours = 5 ; cpus = Some(100) ; price = Some(100)
+  Result => List(RegionWiseResult(asia,$37.4,List((xlarge,2), (8xlarge,6))), RegionWiseResult(us-east,$44.599999999999994,List((xlarge,2), (10xlarge,3))), RegionWiseResult(us-west,$47.349999999999994,List((large,4), (10xlarge,3))))
+
+ 10. hours = 5 ; cpus = Some(100) ; price = Some(30)
+  Result =>  List(RegionWiseResult(asia,$29.499999999999996,List((8xlarge,5))), RegionWiseResult(us-west,$29.700000000000003,List((10xlarge,2))), RegionWiseResult(us-east,$29.95,List((large,1), (xlarge,1), (10xlarge,2))))
+ */
